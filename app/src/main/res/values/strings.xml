@@ -6,4 +6,7 @@
     <string name="hello_arslan_ahmed">Hello Arslan Ahmed</string>
     <string name="arslanahmed">arslanahmed</string>
     <string name="search_movies">Search Movies...</string>
+    <string name="see_all">See all</string>
+    <string name="top_movies">Top Movies</string>
+    <string name="upcoming_movies">Upcoming Movies</string>
 </resources>

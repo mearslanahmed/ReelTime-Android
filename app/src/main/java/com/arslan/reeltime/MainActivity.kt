@@ -6,14 +6,18 @@ import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.arslan.reeltime.adapter.FilmListAdapter
 import com.arslan.reeltime.adapter.SliderAdapter
 import com.arslan.reeltime.databinding.ActivityMainBinding
+import com.arslan.reeltime.model.Film
 import com.arslan.reeltime.model.SliderItems
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
@@ -33,6 +37,42 @@ class MainActivity : AppCompatActivity() {
 
         database = FirebaseDatabase.getInstance()
         initBanner()
+        initTopMovies()
+        initUpcoming()
+    }
+
+    private fun initTopMovies() {
+        val myRef: DatabaseReference = database.getReference("Items")
+        binding.progressBarTopMovies.visibility = View.VISIBLE
+        val items = ArrayList<Film>()
+
+        myRef.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for(i in snapshot.children){
+                        val item = i.getValue(Film::class.java)
+                        if(item!=null){
+                            items.add(item)
+                        }
+                        if (items.isNotEmpty()){
+                            binding.recyclerViewTopMovies.layoutManager=
+                                LinearLayoutManager(
+                                    this@MainActivity,
+                                    LinearLayoutManager.HORIZONTAL, false
+                                )
+                                binding.recyclerViewTopMovies.adapter= FilmListAdapter(items)
+                        }
+                        binding.progressBarTopMovies.visibility = View.GONE
+
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
     private fun initBanner(){
@@ -80,6 +120,39 @@ class MainActivity : AppCompatActivity() {
                 sliderHandle.removeCallbacks(sliderRunnable)
             }
         })
+    }
 
+    private fun initUpcoming() {
+        val myRef: DatabaseReference = database.getReference("Upcomming")
+        binding.progressBarUpcoming.visibility = View.VISIBLE
+        val items = ArrayList<Film>()
+
+        myRef.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for(i in snapshot.children){
+                        val item = i.getValue(Film::class.java)
+                        if(item!=null){
+                            items.add(item)
+                        }
+                        if (items.isNotEmpty()){
+                            binding.recyclerViewUpcoming.layoutManager=
+                                LinearLayoutManager(
+                                    this@MainActivity,
+                                    LinearLayoutManager.HORIZONTAL, false
+                                )
+                            binding.recyclerViewUpcoming.adapter= FilmListAdapter(items)
+                        }
+                        binding.progressBarUpcoming.visibility = View.GONE
+
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 }
