@@ -29,3 +29,9 @@ debug.keystore
 
 # Log and Temp Files
 *.log
+
+.idea/AndroidProjectSystem.xml
+.idea/gradle.xml
+.idea/misc.xml
+.idea/runConfigurations.xml
+.idea/vcs.xml
