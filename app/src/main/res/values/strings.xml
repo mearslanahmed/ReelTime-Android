@@ -9,4 +9,8 @@
     <string name="see_all">See all</string>
     <string name="top_movies">Top Movies</string>
     <string name="upcoming_movies">Upcoming Movies</string>
+    <string name="explorer">Explorer</string>
+    <string name="favorite">Favorite</string>
+    <string name="cart">Cart</string>
+    <string name="profile">Profile</string>
 </resources>
