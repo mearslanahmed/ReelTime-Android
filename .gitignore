@@ -1,0 +1,31 @@
+## Build and Generated Files
+/build
+/app/build
+/captures
+.gradle
+.externalNativeBuild
+.cxx
+*.apk
+*.aab
+*.iml
+
+## Local Configuration and Android Studio Files
+local.properties
+.DS_Store 
+.idea/caches
+.idea/libraries
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/codeStyles
+.idea/runConfigurations # Sometimes useful to share, but usually excluded
+.idea/modules.xml
+
+## Sensitive Files and Debugging
+*.jks # Java KeyStore (signing keys)
+*.keystore
+debug.keystore
+
+# Log and Temp Files
+*.log
