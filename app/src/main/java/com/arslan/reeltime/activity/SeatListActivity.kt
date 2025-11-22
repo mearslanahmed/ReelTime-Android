@@ -5,6 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arslan.reeltime.adapter.DateAdapter
+import com.arslan.reeltime.adapter.TimeAdapter
 import com.arslan.reeltime.databinding.ActivitySeatListBinding
 import com.arslan.reeltime.model.Film
 import java.time.LocalDate
@@ -34,7 +35,9 @@ class SeatListActivity : AppCompatActivity() {
                 LinearLayoutManager(this@SeatListActivity, LinearLayoutManager.HORIZONTAL, false)
                 dateRecyclerview.adapter = DateAdapter(generateDates())
 
-
+            timeRecyclerview.layoutManager =
+                LinearLayoutManager(this@SeatListActivity, LinearLayoutManager.HORIZONTAL, false)
+                timeRecyclerview.adapter = TimeAdapter(generateTimeSlots())
         }
     }
 
@@ -57,5 +60,16 @@ class SeatListActivity : AppCompatActivity() {
 
         return dates
 
+    }
+
+    private fun generateTimeSlots(): List<String>{
+        val timeSlots = mutableListOf<String>()
+        val formatter = DateTimeFormatter.ofPattern("hh:mm a")
+
+        for (i in 0 until 24 step 2){
+            val time = LocalDate.now().atTime(i, 0)
+            timeSlots.add(time.format(formatter))
+        }
+        return timeSlots
     }
 }
