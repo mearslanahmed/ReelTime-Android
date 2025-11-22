@@ -1,5 +1,6 @@
 package com.arslan.reeltime.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
@@ -72,6 +73,12 @@ class DetailFilmActivity : AppCompatActivity() {
             binding.castListView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             binding.castListView.adapter = CastListAdapter(it)
+        }
+
+        binding.buyTicketBtn.setOnClickListener {
+            val intent = Intent(this, SeatListActivity::class.java)
+            intent.putExtra("film", film)
+            startActivity(intent)
         }
     }
 }
