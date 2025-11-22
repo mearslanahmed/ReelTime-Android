@@ -13,4 +13,11 @@
     <string name="favorite">Favorite</string>
     <string name="cart">Cart</string>
     <string name="profile">Profile</string>
+    <string name="title">title</string>
+    <string name="year">year</string>
+    <string name="imdb">imdb</string>
+    <string name="summary">Summary</string>
+    <string name="description">description</string>
+    <string name="cast">Cast</string>
+    <string name="buy_ticket">Buy Ticket</string>
 </resources>

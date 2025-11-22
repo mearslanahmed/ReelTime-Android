@@ -1,9 +1,11 @@
 package com.arslan.reeltime.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.arslan.reeltime.activity.DetailFilmActivity
 import com.arslan.reeltime.databinding.ViewholderFilmBinding
 import com.arslan.reeltime.model.Film
 import com.bumptech.glide.Glide
@@ -26,6 +28,12 @@ RecyclerView.Adapter<FilmListAdapter.ViewHolder>(){
                 .apply(requestOptions)
                 .into(binding.pic)
 
+            binding.root.setOnClickListener {
+                val intent = Intent(context, DetailFilmActivity::class.java)
+                intent.putExtra("object", item)
+                context!!.startActivity(intent)
+
+            }
         }
         }
 
