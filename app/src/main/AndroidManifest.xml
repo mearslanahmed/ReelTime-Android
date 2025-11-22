@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReelTime">
         <activity
+            android:name=".activity.SeatListActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.DetailFilmActivity"
             android:exported="false" />
         <activity

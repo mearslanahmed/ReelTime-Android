@@ -20,4 +20,11 @@
     <string name="description">description</string>
     <string name="cast">Cast</string>
     <string name="buy_ticket">Buy Ticket</string>
+    <string name="selected_seats">Selected Seats</string>
+    <string name="available">Available</string>
+    <string name="selected">Selected</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="_0_rupee">0 Rupee</string>
+    <string name="buy_ticket_btn">Buy Ticket</string>
+    <string name="_0_seat_selected">0 seat selected</string>
 </resources>
