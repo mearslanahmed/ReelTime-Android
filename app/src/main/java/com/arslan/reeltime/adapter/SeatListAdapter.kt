@@ -35,6 +35,8 @@ RecyclerView.Adapter<SeatListAdapter.ViewHolder>(){
         val seat = seatList[position]
         holder.binding.seatTxt.text = seat.name
 
+        holder.binding.seatTxt.isClickable = true
+
         when (seat.status) {
             Seat.SeatStatus.AVAILABLE -> {
                 holder.binding.seatTxt.setBackgroundResource(R.drawable.ic_seat_available)
@@ -47,8 +49,10 @@ RecyclerView.Adapter<SeatListAdapter.ViewHolder>(){
             }
 
             Seat.SeatStatus.UNAVAILABLE -> {
-                holder.binding.seatTxt.setBackgroundResource(R.drawable.ic_seat_available)
+                holder.binding.seatTxt.setBackgroundResource(R.drawable.ic_seat_unavailable)
                 holder.binding.seatTxt.setTextColor(context.getColor(R.color.grey))
+
+                holder.binding.seatTxt.isEnabled = false
             }
         }
 
@@ -62,7 +66,7 @@ RecyclerView.Adapter<SeatListAdapter.ViewHolder>(){
 
                 Seat.SeatStatus.SELECTED -> {
                     seat.status = Seat.SeatStatus.AVAILABLE
-                    selectedSeatName.add(seat.name)
+                    selectedSeatName.remove(seat.name)
                     notifyItemChanged(position)
                 }
                 else -> {}
