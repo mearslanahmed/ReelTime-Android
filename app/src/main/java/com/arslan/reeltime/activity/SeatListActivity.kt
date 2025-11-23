@@ -3,11 +3,15 @@ package com.arslan.reeltime.activity
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arslan.reeltime.adapter.DateAdapter
+import com.arslan.reeltime.adapter.SeatListAdapter
 import com.arslan.reeltime.adapter.TimeAdapter
 import com.arslan.reeltime.databinding.ActivitySeatListBinding
 import com.arslan.reeltime.model.Film
+import com.arslan.reeltime.model.Seat
+import java.text.DecimalFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -27,8 +31,45 @@ class SeatListActivity : AppCompatActivity() {
         getIntentExtra()
         setVariable()
         initTimeDateList()
+        initSeatList()
     }
 
+    private fun initSeatList() {
+        val gridLayoutManager = GridLayoutManager(this, 7)
+        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return if (position % 7 == 3) 1 else 1
+            }
+        }
+
+        binding.apply {
+            seatRecyclerView.layoutManager = gridLayoutManager
+
+            val seatList = mutableListOf<Seat>()
+            val numberSeats = 81
+            for (i in 0 until numberSeats) {
+                val seatName = ""
+                val seatStatus = {
+                    if (i == 2 || i == 20 || i == 33 || i == 41 || i == 50 || i == 72 || i == 73) Seat.SeatStatus.UNAVAILABLE
+                    else Seat.SeatStatus.AVAILABLE
+                }
+                seatList.add(Seat(seatStatus(), seatName))
+            }
+
+            val seatAdapter =
+                SeatListAdapter(seatList, this@SeatListActivity, object : SeatListAdapter.SelectedSeats {
+                    override fun Return(slectedName: String, num: Int) {
+                        numberSelectedTxt.text = "$num Seat Selected"
+                        val df = DecimalFormat("#.##")
+                        price = df.format(num * (film.Price ?: 0.0)).toDouble()
+                        selectedSeats = num
+                        priceTxt.text = "$$price"
+                    }
+                })
+            seatRecyclerView.adapter = seatAdapter
+            seatRecyclerView.isNestedScrollingEnabled = false
+        }
+    }
     private fun initTimeDateList() {
         binding.apply {
             dateRecyclerview.layoutManager =
