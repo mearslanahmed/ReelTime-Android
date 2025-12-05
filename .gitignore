@@ -1,0 +1,41 @@
+# Gradle
+.gradle/
+**/build/
+build/
+
+# Android Studio
+.idea/
+*.iml
+
+# NDK / CMake
+.cxx/
+.externalNativeBuild/
+
+# APK and bundles
+*.apk
+*.aab
+
+# Keystore and signing files
+*.keystore
+*.jks
+key.properties
+
+# Local config
+local.properties
+app/google-services.json
+
+# Kotlin-generated
+.kotlin/
+
+# Release folder
+app/release/
+
+# Logs
+*.log
+
+# Cache
+captures/
+
+# OS files
+.DS_Store
+Thumbs.db
