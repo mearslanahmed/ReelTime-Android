@@ -1,6 +1,7 @@
 package com.arslan.reeltime.activity
 
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arslan.reeltime.adapter.MyTicketsAdapter
@@ -19,6 +20,7 @@ class MyTicketsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         binding = ActivityMyTicketsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

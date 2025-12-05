@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.provider.CalendarContract
 import android.view.View
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.arslan.reeltime.R
@@ -24,6 +25,7 @@ class TicketActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         binding = ActivityTicketBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

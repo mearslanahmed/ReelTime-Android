@@ -17,21 +17,27 @@ class ProfileActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        // Get the current user and display their email
         val currentUser = auth.currentUser
         if (currentUser != null) {
+            // Set user's name and email
+            binding.nameTxt.text = currentUser.displayName
             binding.emailTxt.text = currentUser.email
+
+            // Set user's initial for the avatar
+            val displayName = currentUser.displayName
+            if (!displayName.isNullOrEmpty()) {
+                binding.initialsTxt.text = displayName[0].toString().uppercase()
+            }
+
         } else {
-            // This should not happen if the user is logged in, but as a fallback:
+            // If no user is logged in, redirect to LoginActivity
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
 
-        // Handle the logout button click
         binding.logoutBtn.setOnClickListener {
             auth.signOut()
             val intent = Intent(this, LoginActivity::class.java)
-            // Clear the activity stack so the user can't go back to the profile screen
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             finish()
