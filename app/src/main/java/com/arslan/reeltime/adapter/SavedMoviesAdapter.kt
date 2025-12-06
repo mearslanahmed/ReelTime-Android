@@ -7,7 +7,7 @@ import com.arslan.reeltime.databinding.ViewholderSavedMovieBinding
 import com.arslan.reeltime.model.Film
 import com.bumptech.glide.Glide
 
-class SavedMoviesAdapter(private val movies: List<Film>) : RecyclerView.Adapter<SavedMoviesAdapter.ViewHolder>() {
+class SavedMoviesAdapter(private val movies: List<Film>, private val onUnsaveClicked: (Film) -> Unit) : RecyclerView.Adapter<SavedMoviesAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ViewholderSavedMovieBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(film: Film) {
@@ -15,6 +15,7 @@ class SavedMoviesAdapter(private val movies: List<Film>) : RecyclerView.Adapter<
             Glide.with(binding.root.context)
                 .load(film.Poster)
                 .into(binding.filmPoster)
+            binding.unsaveBtn.setOnClickListener { onUnsaveClicked(film) }
         }
     }
 
