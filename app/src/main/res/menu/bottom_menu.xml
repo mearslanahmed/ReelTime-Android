@@ -9,9 +9,9 @@
         app:cnb_iconColor="@color/white"/>
 
     <item
-        android:id="@+id/favorite"
+        android:id="@+id/saved"
         android:icon="@drawable/btn_2"
-        android:title="@string/favorite"
+        android:title="@string/saved"
         app:cnb_backgroundColor="@color/green"
         app:cnb_iconColor="@color/white"/>
 

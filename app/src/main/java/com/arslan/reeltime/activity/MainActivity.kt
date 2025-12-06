@@ -46,6 +46,10 @@ class MainActivity : AppCompatActivity() {
         binding.bottomMenu.setOnItemSelectedListener(object : ChipNavigationBar.OnItemSelectedListener {
             override fun onItemSelected(id: Int) {
                 when (id) {
+                    R.id.saved -> {
+                        val intent = Intent(this@MainActivity, SavedMoviesActivity::class.java)
+                        startActivity(intent)
+                    }
                     R.id.my_tickets -> {
                         val intent = Intent(this@MainActivity, MyTicketsActivity::class.java)
                         startActivity(intent)

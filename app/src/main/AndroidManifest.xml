@@ -25,6 +25,9 @@
             android:name=".activity.MyTicketsActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.SavedMoviesActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.TicketActivity"
             android:exported="false" />
         <activity

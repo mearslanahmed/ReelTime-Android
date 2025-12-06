@@ -5,7 +5,9 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
@@ -20,6 +22,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import eightbitlab.com.blurview.BlurTarget
 import java.io.File
 import java.io.FileOutputStream
@@ -71,6 +75,10 @@ class DetailFilmActivity : AppCompatActivity() {
                 finish()
             }
 
+            binding.bookmarkBtn.setOnClickListener {
+                saveMovie(filmObject)
+            }
+
             val decorView = window.decorView
             val windowBackground = decorView.background
 
@@ -96,6 +104,31 @@ class DetailFilmActivity : AppCompatActivity() {
                 val intent = Intent(this, SeatListActivity::class.java)
                 intent.putExtra("film", filmObject)
                 startActivity(intent)
+            }
+        }
+    }
+
+    private fun saveMovie(film: Film) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val savedMoviesRef = FirebaseDatabase.getInstance().getReference("saved_movies").child(userId)
+
+        film.Title?.let { title ->
+            // Firebase keys cannot contain '.', '#', '$', '[', ']', or '/'
+            val sanitizedTitle = title.replace(".", "").replace("#", "").replace("$", "").replace("[", "").replace("]", "").replace("/", "")
+            
+            if (sanitizedTitle.isBlank()) {
+                Toast.makeText(this, "Movie title is invalid for saving.", Toast.LENGTH_SHORT).show()
+                return@let
+            }
+
+            savedMoviesRef.child(sanitizedTitle).setValue(film).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Movie Saved!", Toast.LENGTH_SHORT).show()
+                } else {
+                    val errorMessage = task.exception?.message ?: "Unknown error"
+                    Toast.makeText(this, "Failed to save movie: $errorMessage", Toast.LENGTH_LONG).show()
+                    Log.e("DetailFilmActivity", "Firebase database error: $errorMessage", task.exception)
+                }
             }
         }
     }
