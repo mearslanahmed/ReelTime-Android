@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="42dp"
-        app:srcCompat="@drawable/back_dark" />
+        app:srcCompat="@drawable/back_2" />
 
     <TextView
         android:id="@+id/textView"
