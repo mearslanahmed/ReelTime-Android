@@ -2,6 +2,7 @@ package com.arslan.reeltime.activity
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arslan.reeltime.adapter.SavedMoviesAdapter
@@ -21,6 +22,7 @@ class SavedMoviesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         binding = ActivitySavedMoviesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

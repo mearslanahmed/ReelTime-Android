@@ -63,6 +63,11 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.bottomMenu.setItemSelected(R.id.explorer, true)
+    }
+
     private fun initTopMovies() {
         val myRef: DatabaseReference = database.getReference("Items")
         binding.progressBarTopMovies.visibility = View.VISIBLE

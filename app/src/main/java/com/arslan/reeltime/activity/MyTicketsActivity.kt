@@ -29,6 +29,10 @@ class MyTicketsActivity : AppCompatActivity() {
         adapter = MyTicketsAdapter(tickets, ::deleteTicket)
         binding.ticketsRecyclerView.adapter = adapter
 
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
+
         loadTicketsFromFirebase()
     }
 
